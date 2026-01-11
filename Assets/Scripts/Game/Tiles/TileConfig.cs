@@ -1,0 +1,24 @@
+﻿using UnityEngine;
+
+namespace Game.Tiles
+{
+    public enum TileKind //какие плитки могут быть
+    {
+        Normal,
+        Blank,
+        Jelly
+
+    }
+
+    [CreateAssetMenu(fileName = "TileConfig", menuName = "Config/TileConfig")]
+    public class TileConfig : ScriptableObject
+    {
+        [SerializeField] private Sprite _sprite;
+        [SerializeField] private TileKind _tileKind;
+        [SerializeField] private bool _isInteractable; //можно ли взаимодействовать с плиткой
+
+        public Sprite Sprite => _sprite; //публичные свойства только на чтение
+        public TileKind TileKind => _tileKind;
+        public bool IsInteractable => _isInteractable;
+    }
+}
