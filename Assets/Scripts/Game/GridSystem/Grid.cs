@@ -20,10 +20,10 @@ namespace Game.GridSystem
         }
         //сетой надо как-то управлять
         public Vector2Int SetCurrentPosition(Vector2Int value) => CurrentPosition = value;
-        public Vector2Int SetTargetPosition(Vector2Int value) => CurrentPosition = value;
+        public Vector2Int SetTargetPosition(Vector2Int value) => TargetPosition = value;
         
         //координаты будем преобразовывать
-        public Vector3 GridtoWorld(int x, int y) => new Vector3(x, y, z: 0);
+        public Vector3 GridToWorld(int x, int y) => new Vector3(x, y, z:0);
         
         public Vector2Int WorldToGrid(Vector3 worldPosition)
         {
@@ -31,7 +31,7 @@ namespace Game.GridSystem
             var y = Mathf.FloorToInt(worldPosition.y);
             return new Vector2Int(x, y);
         }
-        //теперь можем получать и назначать плитки
+        //теперь можем назначать плитки
         public void SetValue(int x, int y, Tile tile)
         {
             if (IsValidPosition(x, y))
@@ -44,7 +44,7 @@ namespace Game.GridSystem
         }
         
         //получение плитки
-        public Tile GetValue(int x, int y) => IsValidPosition(x, y) ? GameGrid[x, y] : null;
+        public Tile GetValue(int x, int y) => IsValidPosition(x, y) ? GameGrid[x, y] : default;
 
         public Tile GetValue(Vector3 worldPosition)
         {
