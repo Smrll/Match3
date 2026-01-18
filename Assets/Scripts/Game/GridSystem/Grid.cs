@@ -12,12 +12,13 @@ namespace Game.GridSystem
         public Vector2Int CurrentPosition {get; private set;}
         public Vector2Int TargetPosition {get; private set;}
         
-        public Grid(int width, int height) //сетка готова
+        public void SetupGrid(int width, int height) //сетка готова
         {
             Width = width;
             Height = height;
             GameGrid = new Tile[width, height];
         }
+        
         //сетой надо как-то управлять
         public Vector2Int SetCurrentPosition(Vector2Int value) => CurrentPosition = value;
         public Vector2Int SetTargetPosition(Vector2Int value) => TargetPosition = value;

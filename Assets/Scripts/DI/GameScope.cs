@@ -12,6 +12,11 @@ namespace DI
         [SerializeField] private GameBoard _gameBoard;
         protected override void Configure(IContainerBuilder builder)
         {
+            if (_gameBoard == null)
+            {
+                Debug.LogError("GameBoard is not assigned in GameScope!");
+                return;
+            }
             builder.Register<Grid>(Lifetime.Singleton);
             builder.RegisterInstance(_gameBoard);
         }
