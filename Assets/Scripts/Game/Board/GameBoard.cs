@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Game.GridSystem;
 using Game.Tiles;
 using Game.Utils;
 using UnityEngine;
@@ -10,18 +11,22 @@ namespace Game.Board
 {
     public class GameBoard : MonoBehaviour
     {
+        [SerializeField] private bool _isDebagging;
         [SerializeField] private TileConfig _tileConfig;
         private readonly List<Tile> _tilesToRefill = new List<Tile>();//тут храним плитки которые хотим заполнить 
         
         private Grid _grid;
         private TilePool _tilePool;
         private SetupCamera _setupCamera;
+        private GameDebug _gameDebug;
 
         private void Start()
         {
             _grid.SetupGrid(10, 10);
             CreateBoard();
             _setupCamera.SetCamera(_grid.Width, _grid.Height, false);
+            if(_isDebagging)
+                _gameDebug.ShowDebug(transform);
         }
 
         public void CreateBoard()
@@ -46,11 +51,12 @@ namespace Game.Board
 
 
         [Inject]
-        private void Construct(Grid grid, SetupCamera setupCamera, TilePool pool) //аналог конструктора, с помощью инджект даем понять, что мы принимает аргурменты из контейнера 
+        private void Construct(Grid grid, SetupCamera setupCamera, TilePool pool, GameDebug gameDebug) //аналог конструктора, с помощью инджект даем понять, что мы принимает аргурменты из контейнера 
         {
             _grid = grid;
             _setupCamera = setupCamera;
             _tilePool = pool;
+            _gameDebug = gameDebug;
         }
     }
 }

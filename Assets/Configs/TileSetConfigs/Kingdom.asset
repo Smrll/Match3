@@ -12,4 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1244ef9e97b4d43aee30fb306302819, type: 3}
   m_Name: Kingdom
   m_EditorClassIdentifier: Assembly-CSharp::Game.Tiles.TileSetConfig
-  _set: []
+  _set:
+  - {fileID: 11400000, guid: c89f1372ca0110d4b9927471c93a4c5e, type: 2}
+  - {fileID: 11400000, guid: 1117a496928b57d429a1a3edcdaf13f4, type: 2}
+  - {fileID: 11400000, guid: 6d23120ba489d7845940a1998349ec99, type: 2}
+  - {fileID: 11400000, guid: 7b995980a3ccad249927fbf6892bc57a, type: 2}
+  - {fileID: 11400000, guid: 42338c17ad049434f8a7a97b2dceed4d, type: 2}
