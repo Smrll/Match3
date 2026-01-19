@@ -461,6 +461,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdfa6ba5190944ef8ee4fc81ee09619b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Board.GameBoard
+  _tilePrefab: {fileID: 5398243197563958355, guid: d8495f1b8284dd34aa7faa2bc2a698eb, type: 3}
+  _tileConfig: {fileID: 11400000, guid: 1117a496928b57d429a1a3edcdaf13f4, type: 2}
 --- !u!4 &1605778110
 Transform:
   m_ObjectHideFlags: 0
@@ -510,7 +512,7 @@ MonoBehaviour:
   autoRun: 1
   autoInjectGameObjects:
   - {fileID: 1605778108}
-  - {fileID: 1605778108}
+  _gameBoard: {fileID: 1605778109}
 --- !u!4 &1643082995
 Transform:
   m_ObjectHideFlags: 0

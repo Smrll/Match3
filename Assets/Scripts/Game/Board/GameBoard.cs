@@ -5,6 +5,7 @@ using VContainer;
 using Game.GridSystem;
 using Grid = Game.GridSystem.Grid;
 using Game.Tiles;
+using Game.Utils;
 
 //визуальное отображение доски
 namespace Game.Board
@@ -16,11 +17,13 @@ namespace Game.Board
         private readonly List<Tile> _tilesToRefill = new List<Tile>();//тут храним плитки которые хотим заполнить 
         
         private Grid _grid;
+        private SetupCamera _setupCamera;
 
         private void Start()
         {
             _grid.SetupGrid(10, 10);
             CreateBoard();
+            _setupCamera.SetCamera(_grid.Width, _grid.Height, false);
         }
 
         public void CreateBoard()
@@ -46,9 +49,10 @@ namespace Game.Board
 
 
         [Inject]
-        private void Construct(Grid grid) //аналог конструктора, с помощью инджект даем понять, что мы принимает аргурменты из контейнера 
+        private void Construct(Grid grid, SetupCamera setupCamera) //аналог конструктора, с помощью инджект даем понять, что мы принимает аргурменты из контейнера 
         {
             _grid = grid;
+            _setupCamera = setupCamera;
         }
     }
 }

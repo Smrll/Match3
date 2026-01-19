@@ -3,6 +3,7 @@ using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 using Grid = Game.GridSystem.Grid;
+using Game.Utils;
 
 namespace DI
 {
@@ -19,6 +20,7 @@ namespace DI
             }
             builder.Register<Grid>(Lifetime.Singleton);
             builder.RegisterInstance(_gameBoard);
+            builder.Register<SetupCamera>(Lifetime.Singleton);
         }
     }
 }
