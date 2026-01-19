@@ -1,8 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Game.GridSystem;
 using Game.Tiles;
 using Game.Utils;
+using Input;
 using Levels;
+using Unity.VisualScripting;
 using UnityEngine;
 using VContainer;
 using Grid = Game.GridSystem.Grid;
@@ -15,16 +18,21 @@ namespace Game.Board
         [SerializeField] private LevelConfig _levelConfig;
         [SerializeField] private bool _isDebagging;
         [SerializeField] private TileConfig _tileConfig;
-        private readonly List<Tile> _tilesToRefill = new List<Tile>();//тут храним плитки которые хотим заполнить 
+        private readonly List<Tile> _tilesToRefill = new List<Tile>(); 
         
         private Grid _grid;
         private BlankTilesSetup _blankTilesSetup;
         private TilePool _tilePool;
         private SetupCamera _setupCamera;
         private GameDebug _gameDebug;
+        private InputReader _inputReader;
+        
 
         private void Start()
         {
+            _inputReader = new InputReader();
+            _inputReader.EnableInputs(true);
+            //тест клика _inputReader.Click += CLickTest;
             _grid.SetupGrid(_levelConfig.Width, _levelConfig.Height);
             _blankTilesSetup.SetupBlanks(_levelConfig);
             CreateBoard();
@@ -32,6 +40,23 @@ namespace Game.Board
             if(_isDebagging)
                 _gameDebug.ShowDebug(transform);
         }
+
+        //тест клика
+        /*private void OnDisable()
+        {
+            _inputReader.Click -= CLickTest;
+        }
+        
+        private void CLickTest()
+        {
+            Debug.Log("Test");
+        }
+
+        private void Update()
+        {
+            Debug.Log(_inputReader.Position());
+        }*/
+
 
         public void CreateBoard()
         {

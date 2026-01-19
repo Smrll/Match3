@@ -12,10 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed4d2a06a1754bd4864e6bcdde506779, type: 3}
   m_Name: 1Level
   m_EditorClassIdentifier: Assembly-CSharp::Levels.LevelConfig
-  _blankTilesLayout: []
-  _width: 0
-  _height: 0
-  _goalScore: 0
-  _moves: 0
-  _levelNumber: 0
+  _blankTilesLayout:
+  - xPosition: 0
+    yPosition: 0
+  - xPosition: 7
+    yPosition: 0
+  - xPosition: 0
+    yPosition: 7
+  - xPosition: 7
+    yPosition: 7
+  _width: 8
+  _height: 8
+  _goalScore: 10
+  _moves: 10
+  _levelNumber: 1
   _tileSets: 0
