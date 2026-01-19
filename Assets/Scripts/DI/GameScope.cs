@@ -1,9 +1,11 @@
 ﻿using Game.Board;
+using Game.Tiles;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 using Grid = Game.GridSystem.Grid;
 using Game.Utils;
+using ResourcesLoading;
 
 namespace DI
 {
@@ -11,16 +13,20 @@ namespace DI
 
     {
         [SerializeField] private GameBoard _gameBoard;
+        [SerializeField] private GameResourcesLoader _loader;
         protected override void Configure(IContainerBuilder builder)
         {
-            if (_gameBoard == null)
+            /*if (_gameBoard == null)
             {
                 Debug.LogError("GameBoard is not assigned in GameScope!");
                 return;
-            }
-            builder.Register<Grid>(Lifetime.Singleton);
+            }*/
+            
             builder.RegisterInstance(_gameBoard);
+            builder.RegisterInstance(_loader);
             builder.Register<SetupCamera>(Lifetime.Singleton);
+            builder.Register<Grid>(Lifetime.Singleton);
+            builder.Register<TilePool>(Lifetime.Singleton);
         }
     }
 }

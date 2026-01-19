@@ -1,22 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using UnityEngine;
-using VContainer;
-using Game.GridSystem;
-using Grid = Game.GridSystem.Grid;
+﻿using System.Collections.Generic;
 using Game.Tiles;
 using Game.Utils;
+using UnityEngine;
+using VContainer;
+using Grid = Game.GridSystem.Grid;
 
 //визуальное отображение доски
 namespace Game.Board
 {
     public class GameBoard : MonoBehaviour
     {
-        [SerializeField] private GameObject _tilePrefab;
         [SerializeField] private TileConfig _tileConfig;
         private readonly List<Tile> _tilesToRefill = new List<Tile>();//тут храним плитки которые хотим заполнить 
         
         private Grid _grid;
+        private TilePool _tilePool;
         private SetupCamera _setupCamera;
 
         private void Start()
@@ -38,21 +36,21 @@ namespace Game.Board
                 for (int y = 0; y < _grid.Height; y++)
                 {
                     if(_grid.GetValue(x, y)) continue; //если в сетке что-то есть, то идем дальше
-                    var tile = Instantiate(_tilePrefab, transform);
-                    tile.transform.position = _grid.GridToWorld(x, y);
-                    var tileComponent = tile.GetComponent<Tile>();
-                    tileComponent.SetTileConfig(_tileConfig);
-                    _grid.SetValue(x, y, tileComponent);
+                    var tile = _tilePool.GetTile(_grid.GridToWorld(x, y), transform);
+                    _grid.SetValue(x, y, tile);
+                    tile.gameObject.SetActive(true);
+                    _tilesToRefill.Add(tile);
                 }
             }
         }
 
 
         [Inject]
-        private void Construct(Grid grid, SetupCamera setupCamera) //аналог конструктора, с помощью инджект даем понять, что мы принимает аргурменты из контейнера 
+        private void Construct(Grid grid, SetupCamera setupCamera, TilePool pool) //аналог конструктора, с помощью инджект даем понять, что мы принимает аргурменты из контейнера 
         {
             _grid = grid;
             _setupCamera = setupCamera;
+            _tilePool = pool;
         }
     }
 }
