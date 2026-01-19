@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
 using ResourcesLoading;
+using Unity.Mathematics;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 using Random = UnityEngine.Random;
+
 namespace Game.Tiles
 
 {
@@ -41,6 +43,16 @@ namespace Game.Tiles
             tile.SetTileConfig(GetRandomTileConfig());
             _tilePool.Add(tile);
             return tile;
+        }
+        
+        public Tile CreateBlankTile(Vector3 position, Transform parent)
+        {
+            var blankPrefab =
+                _objectResolver.Instantiate(_resourcesLoader.TilePrefab, 
+                    position, quaternion.identity, parent);
+            var blankTile = blankPrefab.GetComponent<Tile>();
+            blankTile.SetTileConfig(_resourcesLoader.BlankConfig);
+            return blankTile;
         }
     
         private TileConfig GetRandomTileConfig() =>
