@@ -28,26 +28,25 @@ namespace Game.Board
         private InputReader _inputReader;
         
 
-        private void Start()
+        private void Awake()
         {
             _inputReader = new InputReader();
             _inputReader.EnableInputs(true);
-            //тест клика _inputReader.Click += CLickTest;
+            // _inputReader.Click += CLickTest;//тест клика
             _grid.SetupGrid(_levelConfig.Width, _levelConfig.Height);
-            _blankTilesSetup.SetupBlanks(_levelConfig);
-            CreateBoard();
+            _blankTilesSetup.SetupBlanks(_levelConfig); ;
             _setupCamera.SetCamera(_grid.Width, _grid.Height, false);
             if(_isDebagging)
                 _gameDebug.ShowDebug(transform);
         }
 
         //тест клика
-        /*private void OnDisable()
+    /*      private void OnDisable()
         {
             _inputReader.Click -= CLickTest;
         }
         
-        private void CLickTest()
+      private void CLickTest()
         {
             Debug.Log("Test");
         }

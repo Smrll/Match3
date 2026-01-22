@@ -17,7 +17,7 @@ namespace Game.Tiles
         [SerializeField] private TileKind _tileKind;
         [SerializeField] private bool _isInteractable; //можно ли взаимодействовать с плиткой
 
-        public Sprite Sprite => _sprite; //публичные свойства только на чтение
+        public Sprite Sprite => _sprite; 
         public TileKind TileKind => _tileKind;
         public bool IsInteractable => _isInteractable;
     }
