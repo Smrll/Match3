@@ -1,4 +1,5 @@
-﻿using Game.Board;
+﻿using Animations;
+using Game.Board;
 using Game.GridSystem;
 using Game.Tiles;
 using UnityEngine;
@@ -31,6 +32,7 @@ namespace DI
             builder.Register<GameDebug>(Lifetime.Singleton);
             builder.Register<TilePool>(Lifetime.Singleton);
             builder.Register<BlankTilesSetup>(Lifetime.Singleton);
+            builder.Register<IAnimation, AnimationManager>(Lifetime.Singleton);
         }
     }
 }
