@@ -26,38 +26,17 @@ namespace Game.Board
         private TilePool _tilePool;
         private SetupCamera _setupCamera;
         private GameDebug _gameDebug;
-        private InputReader _inputReader;
         private IAnimation _animation;
         
 
         private void Awake()
         {
-            _inputReader = new InputReader();
-            _inputReader.EnableInputs(true);
-            // _inputReader.Click += CLickTest;//тест клика
             _grid.SetupGrid(_levelConfig.Width, _levelConfig.Height);
             _blankTilesSetup.SetupBlanks(_levelConfig); ;
             _setupCamera.SetCamera(_grid.Width, _grid.Height, false);
             if(_isDebagging)
                 _gameDebug.ShowDebug(transform);
         }
-
-        //тест клика
-    /*      private void OnDisable()
-        {
-            _inputReader.Click -= CLickTest;
-        }
-        
-      private void CLickTest()
-        {
-            Debug.Log("Test");
-        }
-
-        private void Update()
-        {
-            Debug.Log(_inputReader.Position());
-        }*/
-
 
         public void CreateBoard()
         {
