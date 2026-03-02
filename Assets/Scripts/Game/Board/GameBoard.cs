@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Animations;
 using Game.GridSystem;
+using Game.MatchTiles;
 using Game.Tiles;
 using Game.Utils;
 using Input;
@@ -19,14 +20,15 @@ namespace Game.Board
         [SerializeField] private LevelConfig _levelConfig;
         [SerializeField] private bool _isDebagging;
         [SerializeField] private TileConfig _tileConfig;
-        private readonly List<Tile> _tilesToRefill = new List<Tile>(); 
         
+        private readonly List<Tile> _tilesToRefill = new List<Tile>(); 
         private Grid _grid;
         private BlankTilesSetup _blankTilesSetup;
         private TilePool _tilePool;
         private SetupCamera _setupCamera;
         private GameDebug _gameDebug;
         private IAnimation _animation;
+        private MatchFinder _matchFinder;
         
 
         private void Awake()
@@ -41,8 +43,16 @@ namespace Game.Board
         public void CreateBoard()
         {
             FillBoard();
+            while (_matchFinder.CheckBoardForMatches(_grid))
+            {
+                ClearBoard();
+                FillBoard(); 
+                Debug.Log("Created Board");
+            }
+            _matchFinder.ClearTilesToRemove();
             RevealTiles();
         }
+
 
         private void RevealTiles()
         {
@@ -50,7 +60,6 @@ namespace Game.Board
             {
                 var gameObjectTile = tile.gameObject;
                 _animation.Reveal(gameObjectTile, 1f);
-                
             }
         }
 
@@ -62,25 +71,38 @@ namespace Game.Board
                 {
                     if (_blankTilesSetup.Blanks[x, y])
                     {
-                        if(_grid.GetValue(x, y)) continue; //если в сетке что-то есть, то идем дальше
+                        if(_grid.GetValue(x,y)) continue;
                         var blankTile = _tilePool.CreateBlankTile(_grid.GridToWorld(x, y), transform);
-                        _grid.SetValue(x, y, blankTile);
+                        _grid.SetValue(x,y, blankTile);
                     }
                     else
                     {
                         var tile = _tilePool.GetTile(_grid.GridToWorld(x, y), transform);
-                        _grid.SetValue(x, y, tile);
+                        _grid.SetValue(x,y, tile);
                         tile.gameObject.SetActive(true);
                         _tilesToRefill.Add(tile);
                     }
-                    
                 }
             }
         }
 
+        private void ClearBoard()//подумать
+        {
+            if(_tilesToRefill == null) return;
+            foreach (var tile in _tilesToRefill)
+            {
+                var gridPos = _grid.WorldToGrid(tile.transform.position);
+                _grid.SetValue(gridPos.x, gridPos.y, null);
+                tile.gameObject.SetActive(false);
+            }
+            _tilesToRefill.Clear();
+        }
+
+
 
         [Inject]
-        private void Construct(Grid grid, SetupCamera setupCamera, TilePool pool, GameDebug gameDebug, BlankTilesSetup blankTilesSetup, IAnimation animation) //аналог конструктора, с помощью инджект даем понять, что мы принимает аргурменты из контейнера 
+        private void Construct(Grid grid, SetupCamera setupCamera, TilePool pool, GameDebug gameDebug, 
+            BlankTilesSetup blankTilesSetup, IAnimation animation, MatchFinder matchFinder) //аналог конструктора, с помощью инджект даем понять, что мы принимает аргурменты из контейнера 
         {
             _animation = animation;
             _grid = grid;
@@ -88,6 +110,7 @@ namespace Game.Board
             _tilePool = pool;
             _gameDebug = gameDebug;
             _blankTilesSetup = blankTilesSetup;
+            _matchFinder = matchFinder;
         }
     }
 }
