@@ -9,7 +9,7 @@ namespace GameStateMachine.States
         private readonly IStateSwitcher _stateSwitcher;
         private GameBoard _gameBoard;
 
-        public PrepareState(IStateSwitcher stateSwitcher, GameBoard gameBoard)//зачем нужен конструктор? + вопросы в тг
+        public PrepareState(IStateSwitcher stateSwitcher, GameBoard gameBoard)//
         {
             _gameBoard = gameBoard;
             _stateSwitcher = stateSwitcher;

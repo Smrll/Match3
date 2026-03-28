@@ -9,7 +9,7 @@ namespace Animations
 {
     public class AnimationManager : IAnimation, IDisposable
     {
-        private CancellationTokenSource _cts;//написать что такое корутины(?) чем они отличаются от асинхронных задач,
+        private CancellationTokenSource _cts;//
         
         public async UniTask Reveal(GameObject target, float delay) //метод возвращающий юнитаск 
         {
