@@ -49,7 +49,7 @@ namespace Game.Tiles
         {
             var blankPrefab =
                 _objectResolver.Instantiate(_resourcesLoader.TilePrefab, 
-                    position, quaternion.identity, parent);
+                    position, Quaternion.identity, parent);
             var blankTile = blankPrefab.GetComponent<Tile>();
             blankTile.SetTileConfig(_resourcesLoader.BlankConfig);
             return blankTile;
