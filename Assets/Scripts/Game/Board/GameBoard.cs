@@ -29,7 +29,9 @@ namespace Game.Board
         private GameDebug _gameDebug;
         private IAnimation _animation;
         private MatchFinder _matchFinder;
-        
+
+        public LevelConfig LevelConfig => _levelConfig;
+
 
         private void Awake()
         {

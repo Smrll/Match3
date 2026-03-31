@@ -2,6 +2,7 @@
 using Game.Board;
 using Game.GridSystem;
 using Game.MatchTiles;
+using Game.Score;
 using Game.Tiles;
 using UnityEngine;
 using VContainer;
@@ -35,6 +36,8 @@ namespace DI
             builder.Register<BlankTilesSetup>(Lifetime.Singleton);
             builder.Register<IAnimation, AnimationManager>(Lifetime.Singleton);
             builder.Register<MatchFinder>(Lifetime.Singleton);
+            builder.Register<GameProgress>(Lifetime.Singleton);
+            builder.Register<ScoreCalculator>(Lifetime.Singleton);
         }
     }
 }

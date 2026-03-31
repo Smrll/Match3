@@ -507,7 +507,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Board.GameBoard
   _levelConfig: {fileID: 11400000, guid: 86f4907ccea33634fb368b23bef61b76, type: 2}
-  _isDebagging: 1
+  _isDebagging: 0
   _tileConfig: {fileID: 11400000, guid: 1117a496928b57d429a1a3edcdaf13f4, type: 2}
 --- !u!4 &1605778110
 Transform:
