@@ -34,7 +34,6 @@ namespace DI
             builder.Register<GameDebug>(Lifetime.Singleton);
             builder.Register<TilePool>(Lifetime.Singleton);
             builder.Register<BlankTilesSetup>(Lifetime.Singleton);
-            builder.Register<IAnimation, AnimationManager>(Lifetime.Singleton);
             builder.Register<MatchFinder>(Lifetime.Singleton);
             builder.Register<GameProgress>(Lifetime.Singleton);
             builder.Register<ScoreCalculator>(Lifetime.Singleton);
