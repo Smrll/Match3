@@ -6,6 +6,7 @@ using VContainer.Unity;
 
 namespace Boot
 {
+    
     public class BootEntryPoint : IInitializable
     {
         private IAsyncSceneLoading _sceneLoading;

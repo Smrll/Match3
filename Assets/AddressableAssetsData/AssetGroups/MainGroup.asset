@@ -15,6 +15,11 @@ MonoBehaviour:
   m_GroupName: MainGroup
   m_GUID: 1d5f8a80a3156c84eab40f055ff96781
   m_SerializeEntries:
+  - m_GUID: 0c440fa489afc0c4cbff811168292dc6
+    m_Address: Levels1-5
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 3cbb288ae382c7340b47e5d0efdf6a92
     m_Address: Menu
     m_ReadOnly: 0
@@ -27,6 +32,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 99c9720ab356a0642a771bea13969a05
     m_Address: Game
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9fc561077caddb64aa3a00a23c76da3d
+    m_Address: Levels6-10
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

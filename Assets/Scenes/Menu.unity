@@ -780,7 +780,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8d56814c12a44d6b7888bf1a843c37f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UI.BackgroundScroll
-  _scrollSpeed: 0.07
+  _scrollSpeed: 0.007
   _xDirection: 1
   _yDirection: 0
 --- !u!114 &1053648295
@@ -806,7 +806,7 @@ MonoBehaviour:
   m_Texture: {fileID: 2800000, guid: ff30aa05aca45f04488eb240029c1e2f, type: 3}
   m_UVRect:
     serializedVersion: 2
-    x: 10.23
+    x: 0
     y: 0
     width: 1
     height: 1
