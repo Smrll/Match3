@@ -6,7 +6,6 @@ using Game.GridSystem;
 using Game.MatchTiles;
 using Game.Tiles;
 using GameStateMachine.States;
-using Game.GridSystem;
 using Game.Score;
 
 namespace GameStateMachine

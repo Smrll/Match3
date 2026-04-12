@@ -17,10 +17,8 @@ namespace SceneLoading
         private LoadingView _loadingView;
         private CancellationTokenSource _cts;
 
-        public AsyncSceneLoading(LoadingView loadingView)
-        {
+        public AsyncSceneLoading(LoadingView loadingView) => 
             _loadingView = loadingView;
-        }
 
 
         public async UniTask LoadAsync(string sceneName)
@@ -46,9 +44,7 @@ namespace SceneLoading
             _cts.Cancel();
         }
 
-        public void LoadingIsDone(bool value)
-        {
+        public void LoadingIsDone(bool value) => 
             _loadingView.SetActiveScreen(value != true);
-        }
     }
 }
