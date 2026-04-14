@@ -45,6 +45,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: efbd336b76eb31a4fb1f98dba552c793
+    m_Address: Assets/Audio/AudioMixer.mixer
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 53c8a40966315b447b7f5fd9da329da8, type: 2}
   m_SchemaSet:
