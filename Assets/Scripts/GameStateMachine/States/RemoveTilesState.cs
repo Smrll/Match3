@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading;
 using Animations;
+using Audio;
 using Cysharp.Threading.Tasks;
 using Game.Board;
 using Game.GridSystem;
@@ -20,14 +21,17 @@ namespace GameStateMachine.States
         private IAnimation _animation;
         private MatchFinder _matchFinder;
         private ScoreCalculator _scoreCalculator;
+        private AudioManager _audioManager;
 
-        public RemoveTilesState(Grid grid, IStateSwitcher stateSwitcher, IAnimation animation, MatchFinder  matchFinder,  ScoreCalculator scoreCalculator)
+        public RemoveTilesState(Grid grid, IStateSwitcher stateSwitcher, IAnimation animation, 
+            MatchFinder  matchFinder,  ScoreCalculator scoreCalculator, AudioManager audioManager)
         {
             _grid = grid;
             _stateSwitcher = stateSwitcher;
             _animation = animation;
             _scoreCalculator = scoreCalculator;
             _matchFinder = matchFinder;
+            _audioManager = audioManager;
         }
 
         public void Dispose() => _cts?.Dispose();
@@ -50,7 +54,7 @@ namespace GameStateMachine.States
         {
             foreach (var tile in tilesToRemove)
             {
-                //play sound
+                _audioManager.PlayRemove();
                 var pos = grid.WorldToGrid(tile.transform.position);
                 grid.SetValue(pos.x, pos.y, null);
                 await _animation.HideTile(tile.gameObject);

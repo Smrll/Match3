@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading;
 using Animations;
+using Audio;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Game.MatchTiles;
@@ -22,13 +23,14 @@ namespace GameStateMachine.States
         private MatchFinder _matchFinder;
         private TilePool _tilePool;
         private GameProgress _gameProgress;
+        private AudioManager _audioManager;
         
         private readonly Transform _parent; //родительский парент куда мы будем тайлы из пула приклеивать
         
         private List<Vector2Int> _tilesToRefillPos = new List<Vector2Int>(); //храним позиции тайлов которые надо восполнить
 
         public RefillGridState(Grid grid, IStateSwitcher stateSwitcher, IAnimation animation, 
-            MatchFinder matchFinder, TilePool tilePool, Transform parent, GameProgress progress)
+            MatchFinder matchFinder, TilePool tilePool, Transform parent, GameProgress progress,  AudioManager audioManager)
         {
             _grid = grid;
             _stateSwitcher = stateSwitcher;
@@ -37,6 +39,7 @@ namespace GameStateMachine.States
             _tilePool = tilePool;
             _parent = parent;
             _gameProgress = progress;
+            _audioManager = audioManager;
         }
 
         public async void Enter()
@@ -47,11 +50,11 @@ namespace GameStateMachine.States
             if (_matchFinder.CheckBoardForMatches(_grid))
             {
                 _stateSwitcher.SwitchState<RemoveTilesState>();
-                //_audioManager.PlayMatch();
+                _audioManager.PlayMatch();
             }
             else
             {
-                //_audioManager.PlayNoMatch();
+                _audioManager.PlayNoMatch();
                 CheckEndGame();
             }
         }
@@ -88,7 +91,7 @@ namespace GameStateMachine.States
                     }
                 }
             }
-            //play sound 
+            _audioManager.PlayWhoosh(); 
             await UniTask.Delay(TimeSpan.FromSeconds(0.3f), _cts.IsCancellationRequested);
             _cts.Cancel();
         }
@@ -105,7 +108,7 @@ namespace GameStateMachine.States
                     tile.gameObject.SetActive(true);
                     _grid.SetValue(x,y, tile);
                     _animation.Reveal(tile.gameObject, 0.2f);
-                    //PLAY SOUND 
+                    _audioManager.PlayPop();
                     await UniTask.Delay(TimeSpan.FromSeconds(0.1f), _cts.IsCancellationRequested);//оставляем внутри цикла чтобы тайлы появились неодновременно
                 }
             }

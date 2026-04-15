@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using Animations;
+using Audio;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Game.MatchTiles;
@@ -20,14 +21,17 @@ namespace GameStateMachine.States
         private IAnimation _animation;
         private MatchFinder _matchFinder;
         private GameProgress _progress;
+        private AudioManager _audioManager;
 
-        public SwapTilesState(Grid grid, IStateSwitcher stateSwitcher, IAnimation animation,  MatchFinder matchFinder,  GameProgress progress)
+        public SwapTilesState(Grid grid, IStateSwitcher stateSwitcher, IAnimation animation,  
+            MatchFinder matchFinder,  GameProgress progress,  AudioManager audioManager)
         {
             _grid = grid;
             _stateSwitcher = stateSwitcher;
             _animation = animation;
             _matchFinder = matchFinder;
             _progress = progress;
+            _audioManager = audioManager;
         }
         
         public void Dispose() => _cts?.Dispose();
@@ -35,17 +39,17 @@ namespace GameStateMachine.States
         public async void Enter()
         {
             _cts = new CancellationTokenSource();
-            //sound
+            _audioManager.PlayWhoosh();
             await SwapTiles(_grid.CurrentPosition, _grid.TargetPosition);
             if (_matchFinder.CheckBoardForMatches(_grid) == false)
             {
-                // no match sound in future: _audioManager.PlayNoMatch();
+                _audioManager.PlayNoMatch();
                 await SwapTiles(_grid.TargetPosition, _grid.CurrentPosition);
                 _stateSwitcher.SwitchState<PlayerTurnState>();
             }
             else
             {
-                // mantch sound in future: _audioManager.PlayMatch();
+                _audioManager.PlayMatch();
                 _progress.SpendMoves();
                 _stateSwitcher.SwitchState<RemoveTilesState>();
             }
